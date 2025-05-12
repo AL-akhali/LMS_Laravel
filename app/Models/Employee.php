@@ -16,4 +16,9 @@ class Employee extends Model
         'address',
         'notes',
     ];
+
+    public function leaveRequests()
+{
+    return $this->hasMany(LeaveRequest::class);
+}
 }
