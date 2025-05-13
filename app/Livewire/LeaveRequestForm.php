@@ -21,10 +21,17 @@ class LeaveRequestForm extends Component
     }
 
     public function loadRequests()
-    {
-        // تحميل الطلبات الخاصة بالموظف
-        $this->leaveRequests = LeaveRequest::where('employee_id', Auth::user()->employee_id)->latest()->get();
+{
+    $user = auth()->user();
+
+    if (!$user) {
+        $this->requests = collect(); // أو يمكنك تعيين null أو []
+        return;
     }
+
+    $this->requests = LeaveRequest::where('employee_id', $user->employee_id)->get();
+}
+
 
     public function submit()
     {

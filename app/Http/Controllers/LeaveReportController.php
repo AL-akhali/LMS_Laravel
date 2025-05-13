@@ -16,12 +16,12 @@ class LeaveReportController extends Controller
         $data = $employees->map(function ($employee) {
             $lastLeave = $employee->leaveRequests->first();
             return [
-                'name' => $employee->name,
+                'name' => $employee->employee_name,
                 'employee_number' => $employee->employee_number,
                 'mobile' => $employee->mobile,
                 'total_requests' => $employee->leaveRequests->count(),
                 'last_leave_date' => $lastLeave?->from_date ?? '—',
-                'last_leave_type' => $lastLeave?->leaveType?->name ?? '—',
+                'last_leave_type' => $lastLeave?->leaveType?->leave_type_name ?? '—',
             ];
         });
 
